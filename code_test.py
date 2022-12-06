@@ -296,8 +296,27 @@ with open("crates.txt","r") as file:
         print(stack)
     print(top_crates)   
 """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## DAY 6 ##
-"""
+
 character_required = 0
 character_total = 0
 
@@ -306,17 +325,25 @@ with open("message.txt", "r") as file:
         for index,character in enumerate(line):
             character_total += 1
             try:
-                string_of_4 = str(f'{str(line[index])}{str(line[index+1])}{str(line[index+2])}{str(line[index+3])}')
-                if string_of_4.count(string_of_4[0]) == 1 and string_of_4.count(string_of_4[1]) == 1 and string_of_4.count(string_of_4[2]) == 1:
-                    if character_required == 0:
-                        print(f'characters required =   {(index+3)+1}')
-                        print(f'ID String =   {string_of_4}')
+                string_of_4 = ''
+                for n in range(4):
+                    string_of_4 += str(f'{str(line[index+n])}')
+                valid = 0
+                for m in range(len(string_of_4)):
+                    if string_of_4.count(string_of_4[m]) == 1:
+                        valid += 1
+                        if valid == 4 and character_required == 0:
+                            character_required = index+4
+                            print(f'characters required =   {(index+3)+1}')
+                            print(f'ID String =   {string_of_4}')
+                            break
+                    else:
                         break
         
             except IndexError:
                 print('End of file')
+                break
 
-"""
 
 character_required = 0
 character_total = 0
@@ -337,7 +364,7 @@ with open("message.txt", "r") as file:
                             print(f'ID String =   {string_of_14}')
                             break
                     else:
-                        continue
+                        break
         
             except IndexError:
                 print('End of file')
